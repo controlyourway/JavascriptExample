@@ -63,6 +63,14 @@ function UseEncryptionChanged() {
     }
 }
 
+function UseWebSocketChanged() {
+    if ($('#checkUseWebSocket').prop('checked')) {
+        cyw.SetUseWebSocket(true);
+    } else {
+        cyw.SetUseWebSocket(false);
+    }
+}
+
 //enable or disable debug messages from being added to message box
 function EnableDebugMessagesChanged() {
     if ($('#checkEnableDebugMessages').prop('checked')) {
