@@ -18,7 +18,6 @@ $(function () {
     cyw.SetDataReceivedCallback(RecDataCallback);
     cyw.SetConnectionStatusCallback(ConnectionMessageCallback);
     cyw.SetErrorCallback(ErrorCallback);
-    cyw.SetDebugMessagesCallback(DebugMessageCallback);
     //create username and network name textboxes and start button
     cyw.CywControl("cywControl");
     //see if previously entered information can be loaded from html5 local storage
@@ -68,15 +67,6 @@ function UseWebSocketChanged() {
         cyw.SetUseWebSocket(true);
     } else {
         cyw.SetUseWebSocket(false);
-    }
-}
-
-//enable or disable debug messages from being added to message box
-function EnableDebugMessagesChanged() {
-    if ($('#checkEnableDebugMessages').prop('checked')) {
-        cyw.SetEnableDebugMessages(true);
-    } else {
-        cyw.SetEnableDebugMessages(false);
     }
 }
 
@@ -159,8 +149,7 @@ function ConnectionMessageCallback(connected, sender) {
             }
         }
     } else {
-        //there was an error, get the error message
-        messages += "Connection error: " + cyw.ConvertErrorCodeToString(error) + "\n";
+        messages += "Connection failed\n";
     }
     $('#textAreaMessages').val(messages);
 }
@@ -168,10 +157,6 @@ function ConnectionMessageCallback(connected, sender) {
 function AddMessage(message) {
     messages += message + "\n";
     $('#textAreaMessages').val(messages);
-}
-
-function DebugMessageCallback(message, sender) {
-    AddMessage("Debug message: " + message);
 }
 
 function ClearRecData() {
